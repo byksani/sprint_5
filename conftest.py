@@ -1,10 +1,9 @@
 import pytest
 import random
 from selenium import webdriver
-from elements_to_find import TestLocators
+from tests.elements_to_find import TestLocators
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-
 
 
 class UserRegistration:
