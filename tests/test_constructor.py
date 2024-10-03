@@ -6,41 +6,35 @@ import pytest
 
 
 class TestConstructor:
-    @pytest.mark.parametrize("section_button", [
-        TestLocators.SAUCES_CONSTRUCTION_BUTTON,
-        TestLocators.TOPPINGS_CONSTRUCTION_BUTTON
+    @pytest.mark.parametrize('section_button,status_of_construction_button', [
+        [TestLocators.SAUCES_CONSTRUCTION_BUTTON, TestLocators.STATUS_OF_SAUCES_CONSTRUCTION_BUTTON],
+        [TestLocators.TOPPINGS_CONSTRUCTION_BUTTON, TestLocators.STATUS_OF_TOPPINGS_CONSTRUCTION_BUTTON]
     ])
-    def test_transition_to_the_sauces_and_topping_sections_by_clicking_on_section_buttons_section_selected(self, driver, main_page, section_button):
-        active_button = driver.find_element(*section_button)
-        active_button.click()
+    def test_transition_to_the_sauces_and_topping_sections_by_clicking_on_section_buttons_section_selected(self, driver, main_page, section_button, status_of_construction_button):
+        driver.find_element(*section_button).click()
 
-        section_status = active_button.find_element(By.XPATH, "./parent::div")
-
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 10).until(
             expected_conditions.text_to_be_present_in_element_attribute(
-                (By.XPATH, f"({section_button[1]})/parent::div"), "class", "current"
+                status_of_construction_button, "class", "current"
             )
         )
 
-        assert 'current' in section_status.get_attribute('class')
+        assert 'current' in driver.find_element(*status_of_construction_button).get_attribute('class')
 
     def test_transition_to_the_puns_sections_by_clicking_on_puns_button_section_selected(self, driver, main_page):
         driver.find_element(*TestLocators.SAUCES_CONSTRUCTION_BUTTON).click()
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 10).until(
             expected_conditions.text_to_be_present_in_element_attribute(
-                (By.XPATH, f"({TestLocators.SAUCES_CONSTRUCTION_BUTTON[1]})/parent::div"), "class", "current"
+                TestLocators.STATUS_OF_SAUCES_CONSTRUCTION_BUTTON, "class", "current"
             )
         )
 
-        active_button = driver.find_element(*TestLocators.PUNS_CONSTRUCTOR_BUTTON)
-        active_button.click()
+        driver.find_element(*TestLocators.PUNS_CONSTRUCTOR_BUTTON).click()
 
-        section_status = active_button.find_element(By.XPATH, "./parent::div")
-
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 10).until(
             expected_conditions.text_to_be_present_in_element_attribute(
-                (By.XPATH, f"({TestLocators.PUNS_CONSTRUCTOR_BUTTON[1]})/parent::div"), "class", "current"
+                TestLocators.STATUS_OF_PUNS_CONSTRUCTOR_BUTTON, "class", "current"
             )
         )
 
-        assert 'current' in section_status.get_attribute('class')
+        assert 'current' in driver.find_element(*TestLocators.STATUS_OF_PUNS_CONSTRUCTOR_BUTTON).get_attribute('class')

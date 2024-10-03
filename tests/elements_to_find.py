@@ -13,8 +13,11 @@ class TestLocators:
     PERSONAL_ACCOUNT_BUTTON = By.XPATH, '//a/p[ text()="Личный Кабинет" ]' # Кнопка "Личный кабинет" на главной странице
     LINK_TO_LOGIN_PAGE = By.XPATH, '//p/a[@class="Auth_link__1fOlj"]' # Ссылка на страницу авторизации на странице регистрации
     CONSTRUCTOR_BUTTON = By.XPATH, '//a/p[ text()="Конструктор" ]' # Кнопка "Конструктор" в хедере
-    LOGO_BUTTON = By.XPATH, '//div[ @class="AppHeader_header__logo__2D0X2" ]' # Логотип в хедере
+    LOGO_BUTTON = By.CSS_SELECTOR, 'div[class*="AppHeader_header__logo"]' # Логотип в хедере
     LOGOUT_BUTTON = By.XPATH, '//button[ text()="Выход" ]' # Кнопка "Выход" на странице Личного кабинета
     PUNS_CONSTRUCTOR_BUTTON = By.XPATH, '//span[text()="Булки"]' # Кнопка секции "Булки"
     SAUCES_CONSTRUCTION_BUTTON = By.XPATH, '//span[text()="Соусы"]' # Кнопка секции "Соусы"
     TOPPINGS_CONSTRUCTION_BUTTON = By.XPATH, '//span[text()="Начинки"]' # Кнопка секции "Начинки"
+    STATUS_OF_PUNS_CONSTRUCTOR_BUTTON = By.XPATH, '//span[text()="Булки"]/parent::div' # Кнопка секции "Булки"
+    STATUS_OF_SAUCES_CONSTRUCTION_BUTTON = By.XPATH, '//span[text()="Соусы"]/parent::div' # Кнопка секции "Соусы"
+    STATUS_OF_TOPPINGS_CONSTRUCTION_BUTTON = By.XPATH, '//span[text()="Начинки"]/parent::div' # Кнопка секции "Начинки"

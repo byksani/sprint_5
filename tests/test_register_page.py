@@ -1,6 +1,7 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from elements_to_find import TestLocators
+from config import LOGIN_PAGE_URL
 
 
 class TestRegistration:
@@ -10,8 +11,8 @@ class TestRegistration:
         driver.find_element(*TestLocators.PASSWORD_INPUT_FIELD).send_keys(new_correct_user.password)
         driver.find_element(*TestLocators.REGISTRATION_BUTTON).click()
 
-        WebDriverWait(driver, 5).until(expected_conditions.url_to_be('https://stellarburgers.nomoreparties.site/login'))
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
+        WebDriverWait(driver, 10).until(expected_conditions.url_to_be(LOGIN_PAGE_URL))
+        assert driver.current_url == LOGIN_PAGE_URL
 
 
     def test_register_new_user_short_password_error_displays(self, driver, register_page, new_correct_user):

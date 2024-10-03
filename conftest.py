@@ -4,6 +4,7 @@ from selenium import webdriver
 from tests.elements_to_find import TestLocators
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from config import BASE_URL, REGISTER_PAGE_URL, LOGIN_PAGE_URL
 
 
 class UserRegistration:
@@ -31,22 +32,19 @@ def driver():
 
 @pytest.fixture
 def main_page(driver):
-    main_page_url = 'https://stellarburgers.nomoreparties.site'
-    driver.get(main_page_url)
+    driver.get(BASE_URL)
     WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located(TestLocators.GO_TO_LOGIN_BUTTON))
     return driver
 
 @pytest.fixture
 def register_page(driver):
-    register_page_url = 'https://stellarburgers.nomoreparties.site/register'
-    driver.get(register_page_url)
+    driver.get(REGISTER_PAGE_URL)
     WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located(TestLocators.REGISTRATION_BUTTON))
     return driver
 
 @pytest.fixture
 def authorised_existing_user(driver, existed_user):
-    register_page_url = 'https://stellarburgers.nomoreparties.site/login'
-    driver.get(register_page_url)
+    driver.get(LOGIN_PAGE_URL)
     WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located(TestLocators.LOGIN_BUTTON))
 
     driver.find_element(*TestLocators.EMAIL_INPUT_FIELD).send_keys(existed_user.email)
